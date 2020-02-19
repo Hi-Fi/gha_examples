@@ -35,6 +35,6 @@ jobs:
         export
     - name: Store file created
       uses: actions/upload-artifact@v1.0.0
-        with:
-          name: test_results_with_echo
+      with:
+        name: test_results_with_echo
                 
