@@ -24,4 +24,4 @@ jobs:
         echo With variable syntax: ${{ secrets.SUPER_SECRET_KEY }} > variable_secret
         cat variable_secret
         echo With environment variable: $SUPER_SECRET_KEY > env_secret
-        cat variable_secret
+        cat env_secret
