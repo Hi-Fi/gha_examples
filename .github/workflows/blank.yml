@@ -1,0 +1,27 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run a one-line script
+      run: echo Hello, world!
+    - name: Run a multi-line script
+      run: |
+        echo Add other actions to build,
+        echo test, and deploy your project.
+    - name: Try to print secrets
+      run: |
+        echo With variable syntax: ${{ secrets.SUPER_SECRET_KEY }}
+        echo With environment variable: $SUPER_SECRET_KEY
+    - name: Try to print secrets to file
+      run: |
+        echo With variable syntax: ${{ secrets.SUPER_SECRET_KEY }} > variable_secret
+        cat variable_secret
+        echo With environment variable: $SUPER_SECRET_KEY > env_secret
+        cat variable_secret
