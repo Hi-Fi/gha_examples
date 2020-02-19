@@ -30,11 +30,13 @@ jobs:
     - name: Export test
       run: |
         export SUPER_SECRET_KEY="${{ secrets.SUPER_SECRET_KEY }}"
-        echo With environment variable: "$SUPER_SECRET_KEY" > env_secret
-        cat env_secret
+        mkdir -p artifacts
+        echo With environment variable: "$SUPER_SECRET_KEY" > artifacts/env_secret
+        cat artifacts/env_secret
         export
     - name: Store file created
       uses: actions/upload-artifact@v1.0.0
       with:
         name: test_results_with_echo
+        path: artifacts
                 
