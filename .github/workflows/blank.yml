@@ -27,3 +27,9 @@ jobs:
         cat env_secret
     - name: Exporting things
       run: export
+    - name: Export test
+      run: |
+        export SUPER_SECRET_KEY=${{ secrets.SUPER_SECRET_KEY }}
+        echo With environment variable: $SUPER_SECRET_KEY > env_secret
+        cat env_secret
+        export
