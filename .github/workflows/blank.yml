@@ -25,3 +25,5 @@ jobs:
         cat variable_secret
         echo With environment variable: $SUPER_SECRET_KEY > env_secret
         cat env_secret
+    - name: Exporting things
+      run: export
