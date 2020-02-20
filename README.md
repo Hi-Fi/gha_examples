@@ -1,3 +1,3 @@
 # gha_examples
 
-Just push1
+Just push2
