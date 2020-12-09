@@ -1,10 +1,9 @@
 name: CI
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -39,4 +38,19 @@ jobs:
       with:
         name: test_results_with_echo
         path: artifacts
+
+  not_ignored:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Run a one-line script
+      run: echo "Building ${GITHUB_REF}. Base ${GITHUB_BASE_REF}, Head ${GITHUB_HEAD_REF}"
+      
+  ignored:
+    needs: [not_ignored]
+    runs-on: ubuntu-latest
+    # ! is not working here, so checking that not with boolean comparison
+    if: ${{ !(contains(github.head_ref, 'ignore/') || contains(github.ref, 'ignore/')) }}
+    steps:
+    - name: Run a one-line script
+      run: echo "Building ${GITHUB_REF}. Base ${GITHUB_BASE_REF}, Head ${GITHUB_HEAD_REF}"
                 
