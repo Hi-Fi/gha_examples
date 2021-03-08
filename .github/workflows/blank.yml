@@ -46,8 +46,8 @@ jobs:
       run: echo "Building ${GITHUB_REF}. Base ${GITHUB_BASE_REF}, Head ${GITHUB_HEAD_REF}"
     - name: Test env
       env:
-        TEST1: "first\nsecond"
-        TEST2: "first\\nsecond"
+        TEST1: 'first\nsecond'
+        TEST2: 'first\\nsecond'
         TEST3: |
           first
           second
