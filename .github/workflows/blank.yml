@@ -3,48 +3,52 @@ name: CI
 on: [push, pull_request]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  # build:
+  #   runs-on: ubuntu-latest
 
-    steps:
-    - uses: actions/checkout@v2
-    - name: Run a one-line script
-      run: echo Hello, world!
-    - name: Run a multi-line script
-      run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
-    - name: Try to print secrets
-      run: |
-        echo With variable syntax: ${{ secrets.SUPER_SECRET_KEY }}
-        echo With environment variable: $SUPER_SECRET_KEY
-    - name: Try to print secrets to file
-      run: |
-        echo With variable syntax: ${{ secrets.SUPER_SECRET_KEY }} > variable_secret
-        cat variable_secret
-        echo With environment variable: $SUPER_SECRET_KEY > env_secret
-        cat env_secret
-    - name: Exporting things
-      run: export
-    - name: Export test
-      run: |
-        export SUPER_SECRET_KEY="${{ secrets.SUPER_SECRET_KEY }}"
-        mkdir -p artifacts
-        echo With environment variable: "$SUPER_SECRET_KEY" > artifacts/env_secret
-        cat artifacts/env_secret
-        export
-    - name: Store file created
-      uses: actions/upload-artifact@v1.0.0
-      with:
-        name: test_results_with_echo
-        path: artifacts
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #   - name: Run a one-line script
+  #     run: echo Hello, world!
+  #   - name: Run a multi-line script
+  #     run: |
+  #       echo Add other actions to build,
+  #       echo test, and deploy your project.
+  #   - name: Try to print secrets
+  #     run: |
+  #       echo With variable syntax: ${{ secrets.SUPER_SECRET_KEY }}
+  #       echo With environment variable: $SUPER_SECRET_KEY
+  #   - name: Try to print secrets to file
+  #     run: |
+  #       echo With variable syntax: ${{ secrets.SUPER_SECRET_KEY }} > variable_secret
+  #       cat variable_secret
+  #       echo With environment variable: $SUPER_SECRET_KEY > env_secret
+  #       cat env_secret
+  #   - name: Exporting things
+  #     run: export
+  #   - name: Export test
+  #     run: |
+  #       export SUPER_SECRET_KEY="${{ secrets.SUPER_SECRET_KEY }}"
+  #       mkdir -p artifacts
+  #       echo With environment variable: "$SUPER_SECRET_KEY" > artifacts/env_secret
+  #       cat artifacts/env_secret
+  #       export
+  #   - name: Store file created
+  #     uses: actions/upload-artifact@v1.0.0
+  #     with:
+  #       name: test_results_with_echo
+  #       path: artifacts
 
   not_ignored:
     runs-on: ubuntu-latest
     steps:
     - name: Run a one-line script
       run: echo "Building ${GITHUB_REF}. Base ${GITHUB_BASE_REF}, Head ${GITHUB_HEAD_REF}"
-      
+    - name: Test env
+      env:
+        TEST: "first\nsecond"
+      run: export | grep TEST
+        
   ignored:
     needs: [not_ignored]
     runs-on: ubuntu-latest
